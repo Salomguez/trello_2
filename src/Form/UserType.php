@@ -17,11 +17,6 @@ class UserType extends AbstractType
             ->add('email')
             ->add('first_name')
             ->add('last_name')
-            ->add('tasks', EntityType::class,[
-                'class' => User::class,
-                'mapped' => false,
-                'choice_label' => 'tâches'
-            ])
         ;
     }
 
