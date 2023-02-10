@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Task{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="m-4">
+                <h1>Task </h1>
+
+                {{ form_start(TaskForm) }}
+                {{ form_row(TaskForm.title) }}
+                {{ form_row(TaskForm.content) }}
+                {{ form_row(TaskForm.created_at) }}
+                {{ form_row(TaskForm.updated_at) }}
+                {{ form_row(TaskForm.completed_at) }}
+                {{ form_row(TaskForm.status) }}
+                {{ form_row(TaskForm.user) }}
+                {{ form_row(TaskForm.users) }}
+
+
+
+
+                <button type="submit" class="btn btn-primary">S'enregister</button>
+            </div>
+        </div>
+    </div>
+    {{ form_end(TaskForm) }}
+{% endblock %}
