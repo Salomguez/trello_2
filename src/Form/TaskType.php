@@ -3,6 +3,8 @@
 namespace App\Form;
 
 use App\Entity\Task;
+use App\Entity\Utilisateur;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -19,7 +21,11 @@ class TaskType extends AbstractType
             ->add('completed_at')
             ->add('status')
             ->add('user')
-            ->add('users')
+            ->add('utilisateurs', EntityType::class, [
+                'class' => Utilisateur::class,
+                'mapped' => false,
+                'choice_label' => 'email'
+            ])
         ;
     }
 

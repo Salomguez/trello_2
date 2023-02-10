@@ -60,9 +60,15 @@ class Task
      */
     private $users;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Utilisateur::class, mappedBy="Task")
+     */
+    private $utilisateurs;
+
     public function __construct()
     {
         $this->user = new ArrayCollection();
+        $this->utilisateurs = new ArrayCollection();
     }
 
 
@@ -175,6 +181,33 @@ class Task
     public function setUsers(?User $users): self
     {
         $this->users = $users;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Utilisateur>
+     */
+    public function getUtilisateurs(): Collection
+    {
+        return $this->utilisateurs;
+    }
+
+    public function addUtilisateur(Utilisateur $utilisateur): self
+    {
+        if (!$this->utilisateurs->contains($utilisateur)) {
+            $this->utilisateurs[] = $utilisateur;
+            $utilisateur->addTask($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUtilisateur(Utilisateur $utilisateur): self
+    {
+        if ($this->utilisateurs->removeElement($utilisateur)) {
+            $utilisateur->removeTask($this);
+        }
 
         return $this;
     }

@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UtilisateurRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -46,6 +48,16 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="string", length=255)
      */
     private $last_name;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Task::class, inversedBy="utilisateurs")
+     */
+    private $Task;
+
+    public function __construct()
+    {
+        $this->Task = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -156,6 +168,30 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     public function setLastName(string $last_name): self
     {
         $this->last_name = $last_name;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Task>
+     */
+    public function getTask(): Collection
+    {
+        return $this->Task;
+    }
+
+    public function addTask(Task $task): self
+    {
+        if (!$this->Task->contains($task)) {
+            $this->Task[] = $task;
+        }
+
+        return $this;
+    }
+
+    public function removeTask(Task $task): self
+    {
+        $this->Task->removeElement($task);
 
         return $this;
     }
