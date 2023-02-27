@@ -6,6 +6,7 @@ use App\Entity\Task;
 use App\Entity\Utilisateur;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -19,12 +20,20 @@ class TaskType extends AbstractType
             ->add('created_at')
             ->add('updated_at')
             ->add('completed_at')
-            ->add('status')
-            ->add('user')
+            ->add('status',ChoiceType::class, [
+                'choices'  => [
+                    'NOUVEAU' => 'Nouveau',
+                    'EN COURS' => 'En cours',
+                    'TRAITÉ' => 'Traité',
+                ],
+                'expanded' => false,
+                'multiple' => false,
+                ])
             ->add('utilisateurs', EntityType::class, [
                 'class' => Utilisateur::class,
-                'mapped' => false,
-                'choice_label' => 'email'
+                'choice_label' => 'email',
+                'multiple' => true,
+                'expanded' => true,
             ])
         ;
     }

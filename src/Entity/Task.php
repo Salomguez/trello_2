@@ -6,6 +6,7 @@ use App\Repository\TaskRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use phpDocumentor\Reflection\Types\ClassString;
 
 /**
  * @ORM\Entity()
@@ -45,7 +46,7 @@ class Task
     private $completed_at;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Status::class)
+     * @ORM\ManyToOne(targetEntity=Status::class, inversedBy="tasks")
      * @ORM\JoinColumn(nullable=false)
      */
     private $status;
