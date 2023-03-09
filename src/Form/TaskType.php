@@ -20,15 +20,15 @@ class TaskType extends AbstractType
             ->add('created_at')
             ->add('updated_at')
             ->add('completed_at')
-            ->add('status',ChoiceType::class, [
+            ->add('status', ChoiceType::class, [
                 'choices'  => [
-                    'NOUVEAU' => 'Nouveau',
-                    'EN COURS' => 'En cours',
-                    'TRAITÉ' => 'Traité',
+                    'Nouveau' => 'nouveau',
+                    'En cours' => 'en_cours',
+                    'Traité' => 'traite',
                 ],
                 'expanded' => false,
                 'multiple' => false,
-                ])
+            ])
             ->add('utilisateurs', EntityType::class, [
                 'class' => Utilisateur::class,
                 'choice_label' => 'email',

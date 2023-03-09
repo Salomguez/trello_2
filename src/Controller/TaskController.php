@@ -16,7 +16,7 @@ class TaskController extends AbstractController
     /**
      * @Route("/task", name="app_task")
      */
-    public function index (
+    public function task (
         EntityManagerInterface $entityManager,
         Request $request
     ): Response
@@ -24,6 +24,7 @@ class TaskController extends AbstractController
         $task = new Task();
         $form = $this->createForm(TaskType::class,$task);
         $form->handleRequest($request);
+
         if ($form->isSubmitted () && $form->isValid()) {
             $entityManager->persist($task);
             $entityManager->flush();

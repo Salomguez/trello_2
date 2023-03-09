@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modification de ticket {% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="m-4">
+                <h1> Modif Ticket</h1>
+
+                {{ form_start(form) }}
+                {{ form_widget(form) }}
+                <button type="submit">Save changes</button>
+                <a href="{{ path('homepage') }}">Cancel</a>
+
+            </div>
+        </div>
+    </div>
+    {{ form_end(form) }}
+{% endblock %}
+
